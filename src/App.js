@@ -1,11 +1,11 @@
-import './App.css';
 import { Component } from 'react';
-import Loader from 'react-loader-spinner';
+import LoaderSpinner from './components/Loader/Loader';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import imagesApi from './apiService/images-api';
 import Button from './components/Button/Button';
 import Modal from './components/Modal/Modal';
+import s from './App.module.css';
 
 class App extends Component {
   state = {
@@ -79,18 +79,9 @@ class App extends Component {
     return (
       <>
         <Searchbar onSubmit={this.onChangeQuery} />
-        {error && <h3 className="Error">Search error:( Please try again!)</h3>}
+        {error && <h3 className={s.Error}>Search error: Please try again!</h3>}
         <ImageGallery images={images} onImageClick={this.handleModal} />
-        {isLoading && (
-          <Loader
-            className="Loader"
-            type="Oval"
-            color="#3f51b5"
-            height={50}
-            width={50}
-            timeout={1000}
-          />
-        )}
+        {isLoading && <LoaderSpinner className={s.Loader} />}
         {(images.length && !isLoading) > 0 && (
           <Button onClick={this.fetchImages} />
         )}

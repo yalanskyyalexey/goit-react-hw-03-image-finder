@@ -21,3 +21,13 @@ html {
 *::after {
   box-sizing: inherit;
 }
+
+.LoaderSpinner {
+  display: flex;
+  justify-content: center;
+  margin: 15px auto;
+  /* width: 50px; */
+  /* position: fixed;
+  top: 50%;
+  left: 50%; */
+}

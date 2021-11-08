@@ -30,3 +30,8 @@
   display: flex;
   justify-content: center;
 }
+
+.Error {
+  color: #3f51b5;
+  text-align: center;
+}
