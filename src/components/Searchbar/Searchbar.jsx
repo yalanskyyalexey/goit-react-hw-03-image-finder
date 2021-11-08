@@ -1,23 +1,15 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import s from './Searchbar.module.css';
 
-export default class Searchbar extends Component {
-  state = {
-    query: '',
-  };
+class Searchbar extends Component {
+  state = { query: '' };
 
   handleChange = e => {
-    this.setState({ query: e.currentTarget.value.toLowerCase() });
+    this.setState({ query: e.currentTarget.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-
-    if (this.state.query.trim() === '') {
-      alert('Пустое поле');
-      return;
-    }
-
     this.props.onSubmit(this.state.query);
     this.setState({ query: '' });
   };
@@ -33,8 +25,8 @@ export default class Searchbar extends Component {
           <input
             className={s.SearchForm__input}
             type="text"
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
             value={this.state.query}
             onChange={this.handleChange}
@@ -44,3 +36,5 @@ export default class Searchbar extends Component {
     );
   }
 }
+
+export default Searchbar;

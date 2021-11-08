@@ -1,16 +1,18 @@
-import { Component } from 'react';
+import ImageGalleryItem from '../../components/ImageGalleryItem/ImageGalleryItem';
+import s from './ImageGallery.module.css';
 
-class ImageGallery extends Component {
-  state = {
-    images: [],
-  };
+const ImageGallery = ({ images, onImageClick }) => (
+  <ul className={s.ImageGallery}>
+    {images.map(({ id, tags, webformatURL, largeImageURL }) => (
+      <ImageGalleryItem
+        key={id}
+        alt={tags}
+        previewURL={webformatURL}
+        largeImageURL={largeImageURL}
+        onImageClick={onImageClick}
+      />
+    ))}
+  </ul>
+);
 
-  render() {
-    return (
-      <ul className="ImageGallery">
-        {/* <!-- Набор <li> с изображениями --> */}
-      </ul>
-    );
-  }
-}
 export default ImageGallery;
