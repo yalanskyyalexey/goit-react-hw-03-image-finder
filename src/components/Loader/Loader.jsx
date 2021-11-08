@@ -10,7 +10,7 @@ const LoaderSpinner = () => {
       color="#D9DB57"
       height={100}
       width={100}
-      timeout={4000}
+      timeout={1000}
     />
   );
 };

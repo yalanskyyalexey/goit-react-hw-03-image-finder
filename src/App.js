@@ -56,10 +56,16 @@ class App extends Component {
     imagesApi
       .fetchImages(options)
       .then(images => {
-        this.setState(prevState => ({
-          images: [...prevState.images, ...images],
-          currentPage: prevState.currentPage + 1,
-        }));
+        if (images.length === 0) {
+          this.setState({
+            error: `Error`,
+          });
+        } else {
+          this.setState(prevState => ({
+            images: [...prevState.images, ...images],
+            currentPage: prevState.currentPage + 1,
+          }));
+        }
       })
       .catch(error => this.setState({ error: error }))
       .finally(() =>
