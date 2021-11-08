@@ -9,7 +9,7 @@ const fetchImages = ({ searchQuery = '', currentPage = 1, pageSize = 12 }) => {
     .catch(error => console.log('error: ', error));
 };
 
-export default { fetchImages };
+export default fetchImages;
 
 // const API_KEY = '7055575-04a3ba49e3c82fdd87935eab9';
 // const BASE_URL = 'https://pixabay.com/api/';

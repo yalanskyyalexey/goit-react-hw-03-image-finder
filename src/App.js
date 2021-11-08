@@ -2,7 +2,7 @@ import { Component } from 'react';
 import LoaderSpinner from './components/Loader/Loader';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
-import imagesApi from './apiService/images-api';
+import fetchImages from './apiService/images-api';
 import Button from './components/Button/Button';
 import Modal from './components/Modal/Modal';
 import s from './App.module.css';
@@ -22,7 +22,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps, PrevState) {
     if (PrevState.searchQuery !== this.state.searchQuery) {
-      this.fetchImages();
+      this.getImagesFromApi();
     }
   }
 
@@ -48,13 +48,13 @@ class App extends Component {
     this.toggleModal();
   };
 
-  fetchImages = () => {
+  getImagesFromApi = () => {
     const { searchQuery, currentPage, pageSize } = this.state;
     const options = { searchQuery, currentPage, pageSize };
     this.setState({ isLoading: true });
 
-    imagesApi
-      .fetchImages(options)
+    fetchImages(options)
+      // .fetchImages(options)
       .then(images => {
         if (images.length === 0) {
           this.setState({
@@ -89,7 +89,7 @@ class App extends Component {
         <ImageGallery images={images} onImageClick={this.handleModal} />
         {isLoading && <LoaderSpinner className={s.Loader} />}
         {(images.length && !isLoading) > 0 && (
-          <Button onClick={this.fetchImages} />
+          <Button onClick={this.getImagesFromApi} />
         )}
         {showModal && (
           <Modal onClose={this.toggleModal}>
