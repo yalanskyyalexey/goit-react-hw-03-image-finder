@@ -24,6 +24,10 @@ class App extends Component {
     if (PrevState.searchQuery !== this.state.searchQuery) {
       this.getImagesFromApi();
     }
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
   }
 
   onChangeQuery = query => {
@@ -54,7 +58,6 @@ class App extends Component {
     this.setState({ isLoading: true });
 
     fetchImages(options)
-      // .fetchImages(options)
       .then(images => {
         if (images.length === 0) {
           this.setState({
@@ -68,15 +71,7 @@ class App extends Component {
         }
       })
       .catch(error => this.setState({ error: error }))
-      .finally(() =>
-        this.setState(
-          { isLoading: false },
-          window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth',
-          }),
-        ),
-      );
+      .finally(() => this.setState({ isLoading: false }));
   };
 
   render() {
@@ -85,7 +80,11 @@ class App extends Component {
     return (
       <>
         <Searchbar onSubmit={this.onChangeQuery} />
-        {error && <h3 className={s.Error}>Search error: Please try again!</h3>}
+        {error && (
+          <h3 className={s.Error}>
+            Oops! That image can’t be found. Please, try anothe request!
+          </h3>
+        )}
         <ImageGallery images={images} onImageClick={this.handleModal} />
         {isLoading && <LoaderSpinner className={s.Loader} />}
         {(images.length && !isLoading) > 0 && (

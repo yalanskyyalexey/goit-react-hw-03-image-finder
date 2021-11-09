@@ -24,3 +24,7 @@ html {
 *::after {
   box-sizing: inherit;
 }
+
+h3 {
+  text-align: center;
+}
